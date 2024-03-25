@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "SyspotecDal": {
+      "commandName": "Project",
+      "environmentVariables": {
+        "SENDGRID_KEY": ""
+      }
+    }
+  }
+}
