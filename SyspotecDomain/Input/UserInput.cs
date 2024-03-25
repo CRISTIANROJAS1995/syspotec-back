@@ -17,9 +17,6 @@ namespace SyspotecDomain.Input
         public int TypeIdentificationId { get; set; }
 
         [Required]
-        public int StateId { get; set; }
-
-        [Required]
         [DataType(DataType.EmailAddress)]
         [EmailAddress]
         public string Email { get; set; }
