@@ -1,10 +1,4 @@
-﻿
-using SyspotecDomain.Entities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using SyspotecDomain.Dtos.User;
 
 namespace SyspotecDomain.Extension
 {
@@ -14,6 +8,6 @@ namespace SyspotecDomain.Extension
 
         public string RefreshToken { get; set; }
 
-        //public UserResponseDto UserData { get; set; }
+        public UserDto UserData { get; set; }
     }
 }

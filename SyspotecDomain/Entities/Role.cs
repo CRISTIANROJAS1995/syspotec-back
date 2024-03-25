@@ -14,6 +14,6 @@ namespace SyspotecDomain.Entities
         [Required]
         public string Name { get; set; }
 
-        //public ICollection<User> User { get; set; }
+        public ICollection<User> User { get; set; }
     }
 }

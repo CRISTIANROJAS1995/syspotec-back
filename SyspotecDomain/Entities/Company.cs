@@ -38,6 +38,6 @@ namespace SyspotecDomain.Entities
         [ForeignKey("StateId")]
         public State State { get; set; }
 
-        //public ICollection<User> User { get; set; }
+        public ICollection<User> User { get; set; }
     }
 }

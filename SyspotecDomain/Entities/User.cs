@@ -1,79 +1,72 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SyspotecDomain.Entities
 {
     public class User
     {
-        //public int Id { get; set; }
+        public int Id { get; set; }
 
-        //public string Identifier { get; set; }
+        public string Identifier { get; set; }
 
-        //public int SubscriptionId { get; set; }
+        [Required]
+        public int CompanyId { get; set; }
 
-        //[Required]
-        //public int GenderId { get; set; }
+        [Required]
+        public int RoleId { get; set; }
 
-        //public int StateId { get; set; }
+        [Required]
+        public int GenderId { get; set; }
 
-        //[Required]
-        //public string Name { get; set; }
+        [Required]
+        public int TypeIdentificationId { get; set; }
 
-        //[Required]
-        //public string UserName { get; set; }
+        [Required]
+        public int StateId { get; set; }
 
-        //[Required]
-        //public string Password { get; set; }
+        [Required]
+        [DataType(DataType.EmailAddress)]
+        [EmailAddress]
+        public string Email { get; set; }
 
-        //[Required]
-        //public string ArtistName { get; set; }
+        [Required]
+        public string Password { get; set; }
 
-        //[Required]
-        //[DataType(DataType.EmailAddress)]
-        //[EmailAddress]
-        //public string Email { get; set; }
+        [Required]
+        public string Name { get; set; }
 
-        //[Required]
-        //public string Nationality { get; set; }
+        [Required]
+        public string LastName { get; set; }
 
-        //public string CodeHfa { get; set; }
+        [Required]
+        public string Identification { get; set; }
 
-        //public string CodeNationality { get; set; }
+        public string Phone { get; set; }
 
-        //[Required]
-        //public DateTime BirthDate { get; set; }
+        public string Address { get; set; }
 
-        //public bool IsVerified { get; set; }
+        [Required]
+        public DateTime CreatedDate { get; set; }
 
-        //public string DeviceToken { get; set; }
-
-        //[Required]
-        //public DateTime CreatedDate { get; set; }
-
-        //public DateTime UpdateDate { get; set; }
-
-        //[Required]
-        //public int CoinAmount { get; set; }
-
-        //[Required]
-        //public int PointAmount { get; set; }
-
-        //public bool IsMigration { get; set; }
+        public DateTime UpdateDate { get; set; }
 
 
-        //[ForeignKey("SubscriptionId")]
-        //public Subscription Subscription { get; set; }
+        [ForeignKey("CompanyId")]
+        public Company Company { get; set; }
 
-        //[ForeignKey("GenderId")]
-        //public Gender Gender { get; set; }
+        [ForeignKey("RoleId")]
+        public Role Role { get; set; }
 
-        //[ForeignKey("StateId")]
-        //public State State { get; set; }
+        [ForeignKey("GenderId")]
+        public Gender Gender { get; set; }
+
+        [ForeignKey("TypeIdentificationId")]
+        public TypeIdentification TypeIdentification { get; set; }
+
+        [ForeignKey("StateId")]
+        public State State { get; set; }
+
 
         //public ICollection<UserBiography> UserBiography { get; set; }
         //public ICollection<UserBlock> UserBlock { get; set; }

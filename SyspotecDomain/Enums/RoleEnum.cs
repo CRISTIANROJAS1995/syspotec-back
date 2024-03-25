@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace SyspotecDomain.Enums
 {
-    public enum GenderEnum
+    public enum RoleEnum
     {
-        Male = 1,
-        Female = 2,
+        Standard = 1,
+        Admin = 2,
     }
 }
