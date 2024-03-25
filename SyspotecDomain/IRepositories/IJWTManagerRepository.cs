@@ -1,5 +1,5 @@
 ﻿using SyspotecDomain.Dtos;
-using SyspotecDomain.Dtos.User;
+//using SyspotecDomain.Dtos.User;
 using SyspotecDomain.Entities;
 using SyspotecDomain.Extension;
 using System;
@@ -12,7 +12,7 @@ namespace SyspotecDomain.IRepositories
 {
     public interface IJWTManagerRepository
     {
-        Task<ResponseApiDto> AuthenticateAsync(RequestLoginDto request);
-        Task<ResponseApiDto> AuthenticateForgotAsync(RequestLoginDto request);
+        //Task<ResponseApiDto> AuthenticateAsync(RequestLoginDto request);
+        //Task<ResponseApiDto> AuthenticateForgotAsync(RequestLoginDto request);
     }
 }

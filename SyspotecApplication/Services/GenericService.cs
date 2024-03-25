@@ -1,13 +1,6 @@
 ﻿using SyspotecDomain.Dtos.Generic;
-using SyspotecDomain.Entities;
 using SyspotecDomain.IRepositories;
 using SyspotecDomain.IServices;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Range = SyspotecDomain.Entities.Range;
 
 namespace SyspotecApplication.Services
 {
@@ -21,86 +14,30 @@ namespace SyspotecApplication.Services
             _genericRepository = genericRepository;
         }
 
-        public async Task<AppConfiguration?> GetAppConfiguration()
+        public async Task<List<CompanyDto>?> AllCompany()
         {
-            var response = await _genericRepository.GetAppConfiguration();
-            return response;
+            return await _genericRepository.AllCompany();
         }
 
-        public async Task<List<Gender>?> GetAllGender()
+        public async Task<List<StateDto>?> AllState()
         {
-            var response = await _genericRepository.GetAllGender();
-            return response;
+            return await _genericRepository.AllState();
         }
 
-        public async Task<List<InstrumentInterest>?> GetAllInstrumentInterest()
+        public async Task<List<GenderDto>?> AllGender()
         {
-            var response = await _genericRepository.GetAllInstrumentInterest();
-            return response;
+            return await _genericRepository.AllGender();
         }
 
-        public async Task<List<MusicalInterest>?> GetAllMusicalInterest()
+        public async Task<List<RoleDto>?> AllRole()
         {
-            var response = await _genericRepository.GetAllMusicalInterest();
-            return response;
+            return await _genericRepository.AllRole();
         }
 
-        public async Task<List<Range>?> GetAllRange()
+        public async Task<List<TypeIdentificationDto>?> AllTypeIdentification()
         {
-            var response = await _genericRepository.GetAllRange();
-            return response;
+            return await _genericRepository.AllTypeIdentification();
         }
 
-        public async Task<List<SocialInterest>?> GetAllSocialInterest()
-        {
-            var response = await _genericRepository.GetAllSocialInterest();
-            return response;
-        }
-
-        public async Task<List<State>?> GetAllState()
-        {
-            var response = await _genericRepository.GetAllState();
-            return response;
-        }
-
-        public async Task<List<Store>?> GetAllStore()
-        {
-            var response = await _genericRepository.GetAllStore();
-            return response;
-        }
-
-        public async Task<List<SubscriptionDto>?> GetAllSubscription()
-        {
-            var response = await _genericRepository.GetAllSubscription();
-            return response;
-        }
-
-        public async Task<List<TypeSubscription>?> GetAllTypeSubscription()
-        {
-            var response = await _genericRepository.GetAllTypeSubscription();
-            return response;
-        }
-
-        public async Task<List<TypeImage>?> GetAllTypeImage()
-        {
-            var response = await _genericRepository.GetAllTypeImage();
-            return response;
-        }
-
-        public async Task<List<TypeReaction>?> GetAllTypeReaction()
-        {
-            var response = await _genericRepository.GetAllTypeReaction();
-            return response;
-        }
-
-        public async Task<List<DailyAchievement>?> GetAllDailyAchievement()
-        {
-            return await _genericRepository.GetAllDailyAchievement();
-        }
-
-        public async Task<List<PlayListGenericResponseDto>?> GetAllPlayList()
-        {
-            return await _genericRepository.GetAllPlayList();
-        }
     }
 }

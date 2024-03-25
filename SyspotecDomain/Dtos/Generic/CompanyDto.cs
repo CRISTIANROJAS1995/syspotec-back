@@ -9,17 +9,20 @@ using System.Threading.Tasks;
 
 namespace SyspotecDomain.Dtos.Generic
 {
-    public class PlayListGenericResponseDto
+    public class CompanyDto
     {
-        //public TypePlayListDto TypePlayList { get; set; }
+        public string Identifier { get; set; }
 
         public StateDto State { get; set; }
 
-        public string CoverImage { get; set; }
+        public string Name { get; set; }
 
-        public string Title { get; set; }
+        public string Nit { get; set; }
+
+        public string Phone { get; set; }
+
+        public string Address { get; set; }
 
         public string Description { get; set; }
-
     }
 }

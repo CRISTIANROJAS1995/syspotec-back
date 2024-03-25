@@ -15,12 +15,7 @@ namespace SyspotecDomain.Entities
         [Required]
         public string Name { get; set; }
 
-        [Required]
-        public DateTime CreatedDate { get; set; }
-
-        public DateTime UpdateDate { get; set; }
-
-        public ICollection<User> User { get; set; }
+        //public ICollection<User> User { get; set; }
 
     }
 }

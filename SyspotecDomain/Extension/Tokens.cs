@@ -1,4 +1,4 @@
-﻿using SyspotecDomain.Dtos.User;
+﻿
 using SyspotecDomain.Entities;
 using System;
 using System.Collections.Generic;
@@ -14,6 +14,6 @@ namespace SyspotecDomain.Extension
 
         public string RefreshToken { get; set; }
 
-        public UserResponseDto UserData { get; set; }
+        //public UserResponseDto UserData { get; set; }
     }
 }

@@ -8,19 +8,36 @@ using System.Threading.Tasks;
 
 namespace SyspotecDomain.Entities
 {
-    public class InstrumentInterest
+    public class Company
     {
         public int Id { get; set; }
 
         [Required]
+        public string Identifier { get; set; }
+
+        [Required]
+        public int StateId { get; set; }
+
+        [Required]
         public string Name { get; set; }
+
+        [Required]
+        public string Nit { get; set; }
+
+        public string Phone { get; set; }
+
+        public string Address { get; set; }
+
+        public string Description { get; set; }
 
         [Required]
         public DateTime CreatedDate { get; set; }
 
         public DateTime UpdateDate { get; set; }
 
-        public ICollection<HiBeatInstrumentInterest> HiBeatInstrumentInterest { get; set; }
+        [ForeignKey("StateId")]
+        public State State { get; set; }
 
+        //public ICollection<User> User { get; set; }
     }
 }

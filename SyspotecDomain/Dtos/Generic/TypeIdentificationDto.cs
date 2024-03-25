@@ -6,11 +6,10 @@ using System.Threading.Tasks;
 
 namespace SyspotecDomain.Dtos.Generic
 {
-    public class TypeImageDto
+    public class TypeIdentificationDto
     {
         public int Id { get; set; }
 
         public string Name { get; set; }
-
     }
 }

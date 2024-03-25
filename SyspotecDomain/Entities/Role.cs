@@ -7,20 +7,13 @@ using System.Threading.Tasks;
 
 namespace SyspotecDomain.Entities
 {
-    public class UserActivation
+    public class Role
     {
-        [Required]
         public int Id { get; set; }
 
         [Required]
-        public string Email { get; set; }
+        public string Name { get; set; }
 
-        [Required]
-        public bool EmailConfirm { get; set; }
-
-        public DateTime CreatedDate { get; set; }
-
-        public DateTime UpdateDate { get; set; }
-
+        //public ICollection<User> User { get; set; }
     }
 }
