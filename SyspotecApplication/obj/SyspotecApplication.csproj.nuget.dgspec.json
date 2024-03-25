@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Repositorios\\syspotec-api\\SyspotecApplication\\SyspotecApplication.csproj": {}
+    "C:\\Repositorios\\syspotec-back\\SyspotecApplication\\SyspotecApplication.csproj": {}
   },
   "projects": {
-    "C:\\Repositorios\\syspotec-api\\SyspotecApplication\\SyspotecApplication.csproj": {
+    "C:\\Repositorios\\syspotec-back\\SyspotecApplication\\SyspotecApplication.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Repositorios\\syspotec-api\\SyspotecApplication\\SyspotecApplication.csproj",
+        "projectUniqueName": "C:\\Repositorios\\syspotec-back\\SyspotecApplication\\SyspotecApplication.csproj",
         "projectName": "SyspotecApplication",
-        "projectPath": "C:\\Repositorios\\syspotec-api\\SyspotecApplication\\SyspotecApplication.csproj",
+        "projectPath": "C:\\Repositorios\\syspotec-back\\SyspotecApplication\\SyspotecApplication.csproj",
         "packagesPath": "C:\\Users\\crist\\.nuget\\packages\\",
-        "outputPath": "C:\\Repositorios\\syspotec-api\\SyspotecApplication\\obj\\",
+        "outputPath": "C:\\Repositorios\\syspotec-back\\SyspotecApplication\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -33,8 +33,8 @@
           "net6.0": {
             "targetAlias": "net6.0",
             "projectReferences": {
-              "C:\\Repositorios\\syspotec-api\\SyspotecDomain\\SyspotecDomain.csproj": {
-                "projectPath": "C:\\Repositorios\\syspotec-api\\SyspotecDomain\\SyspotecDomain.csproj"
+              "C:\\Repositorios\\syspotec-back\\SyspotecDomain\\SyspotecDomain.csproj": {
+                "projectPath": "C:\\Repositorios\\syspotec-back\\SyspotecDomain\\SyspotecDomain.csproj"
               }
             }
           }
@@ -68,14 +68,14 @@
         }
       }
     },
-    "C:\\Repositorios\\syspotec-api\\SyspotecDomain\\SyspotecDomain.csproj": {
+    "C:\\Repositorios\\syspotec-back\\SyspotecDomain\\SyspotecDomain.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Repositorios\\syspotec-api\\SyspotecDomain\\SyspotecDomain.csproj",
+        "projectUniqueName": "C:\\Repositorios\\syspotec-back\\SyspotecDomain\\SyspotecDomain.csproj",
         "projectName": "SyspotecDomain",
-        "projectPath": "C:\\Repositorios\\syspotec-api\\SyspotecDomain\\SyspotecDomain.csproj",
+        "projectPath": "C:\\Repositorios\\syspotec-back\\SyspotecDomain\\SyspotecDomain.csproj",
         "packagesPath": "C:\\Users\\crist\\.nuget\\packages\\",
-        "outputPath": "C:\\Repositorios\\syspotec-api\\SyspotecDomain\\obj\\",
+        "outputPath": "C:\\Repositorios\\syspotec-back\\SyspotecDomain\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
