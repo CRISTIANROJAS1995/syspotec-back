@@ -1,6 +1,5 @@
 ﻿using SyspotecDomain.Dtos;
 using SyspotecDomain.Dtos.Generic;
-using SyspotecDomain.Dtos.Hibeat;
 using SyspotecDomain.Dtos.User;
 using SyspotecDomain.Entities;
 using SyspotecDomain.IRepositories;
@@ -17,17 +16,14 @@ namespace SyspotecDal.Repository
     {
         private readonly ApplicationDbContext _context;
         private readonly IHttpContextAccessor _httpContextAccessor;
-        private readonly IHibeatRepository _hibeatRepository;
 
         public UserRepository(
             ApplicationDbContext context,
-            IHttpContextAccessor httpContextAccessor,
-            IHibeatRepository hibeatRepository
+            IHttpContextAccessor httpContextAccessor
             )
         {
             _context = context;
             _httpContextAccessor = httpContextAccessor;
-            _hibeatRepository = hibeatRepository;
         }
 
         public async Task<List<UserResponseDto>?> GetAll(PaginationDto pagination)
@@ -361,17 +357,17 @@ namespace SyspotecDal.Repository
                 response.Map = GetMap(consult.UserMap.ToList());
 
                 //calc points of my hibeats
-                var consultHibeats = await _hibeatRepository.GetByUserIdentifier(consult.Identifier);
+                //var consultHibeats = await _hibeatRepository.GetByUserIdentifier(consult.Identifier);
 
-                response.PointAmount = consultHibeats!.Count > 0 ? consultHibeats.Sum(r => r.Points) : 0;
-                response.LstHibeat = consultHibeats;
+                //response.PointAmount = consultHibeats!.Count > 0 ? consultHibeats.Sum(r => r.Points) : 0;
+                //response.LstHibeat = consultHibeats;
 
-                //stats
-                response.TotalMonthlyListener = consultHibeats!.Count > 0 ? consultHibeats.Sum(r => r.Stats!.TotalMonthlyListener) : 0;
-                response.TotalReproduction = consultHibeats!.Count > 0 ? consultHibeats.Sum(r => r.Stats!.TotalReproduction) : 0;
-                response.TotalLike = consultHibeats!.Count > 0 ? consultHibeats.Sum(r => r.Stats!.TotalLike) : 0;
-                response.TotalShare = consultHibeats!.Count > 0 ? consultHibeats.Sum(r => r.Stats!.TotalShare) : 0;
-                response.TotalComment = consultHibeats!.Count > 0 ? consultHibeats.Sum(r => r.Stats!.TotalComment) : 0;
+                ////stats
+                //response.TotalMonthlyListener = consultHibeats!.Count > 0 ? consultHibeats.Sum(r => r.Stats!.TotalMonthlyListener) : 0;
+                //response.TotalReproduction = consultHibeats!.Count > 0 ? consultHibeats.Sum(r => r.Stats!.TotalReproduction) : 0;
+                //response.TotalLike = consultHibeats!.Count > 0 ? consultHibeats.Sum(r => r.Stats!.TotalLike) : 0;
+                //response.TotalShare = consultHibeats!.Count > 0 ? consultHibeats.Sum(r => r.Stats!.TotalShare) : 0;
+                //response.TotalComment = consultHibeats!.Count > 0 ? consultHibeats.Sum(r => r.Stats!.TotalComment) : 0;
             }
 
             return response;

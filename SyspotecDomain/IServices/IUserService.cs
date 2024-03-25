@@ -1,5 +1,4 @@
 ﻿using SyspotecDomain.Dtos;
-using SyspotecDomain.Dtos.Hibeat;
 using SyspotecDomain.Dtos.User;
 using SyspotecDomain.Entities;
 using SyspotecDomain.Extension;

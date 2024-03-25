@@ -10,7 +10,6 @@ using SyspotecDomain.Dtos.User;
 using System.Reflection;
 using System.Threading.Tasks;
 using static System.Net.WebRequestMethods;
-using SyspotecDomain.Dtos.Hibeat;
 
 namespace SyspotecApplication.Services
 {
@@ -18,19 +17,13 @@ namespace SyspotecApplication.Services
     {
         private readonly IUserRepository _userRepository;
         private readonly IJWTManagerRepository _jWTManagerRepository;
-        private readonly IUserActivationService _userActivationService;
-        private readonly IUserBiographyService _userBiographyService;
 
         public UserService(
             IUserRepository userRepository,
-            IJWTManagerRepository jWTManagerRepository,
-            IUserActivationService userActivationService,
-            IUserBiographyService userBiographyService)
+            IJWTManagerRepository jWTManagerRepository)
         {
             _userRepository = userRepository;
             _jWTManagerRepository = jWTManagerRepository;
-            _userActivationService = userActivationService;
-            _userBiographyService = userBiographyService;
         }
 
         public async Task<ResponseApiDto> AuthenticateAsync(RequestLoginDto request)
@@ -49,19 +42,19 @@ namespace SyspotecApplication.Services
             if (user == null)
             {
                 //valid user activation
-                var userActivation = await _userActivationService.GetByEmailActivation(request.Email);
-                if (userActivation == null)
-                {
-                    response.Result = false;
-                    response.Message = "El usuario no esta activado.";
-                }
-                else
-                {
+                //var userActivation = await _userActivationService.GetByEmailActivation(request.Email);
+                //if (userActivation == null)
+                //{
+                //    response.Result = false;
+                //    response.Message = "El usuario no esta activado.";
+                //}
+                //else
+                //{
                     Guid obj = Guid.NewGuid();
                     User model = new User();
 
                     model.Identifier = obj.ToString();
-                    model.SubscriptionId = (int)SubscriptionEnum.Free;
+                   // model.SubscriptionId = (int)SubscriptionEnum.Free;
                     model.GenderId = request.GenderId;
                     model.StateId = (int)StateEnum.Active;
                     model.Name = request.Name;
@@ -89,7 +82,7 @@ namespace SyspotecApplication.Services
                         var consultUser = await _userRepository.GetByEmail(request.Email);
                         if (consultUser != null && request.Biography != null)
                         {
-                            await AddOrUpdateBiography(consultUser.Id, request.Biography);
+                           // await AddOrUpdateBiography(consultUser.Id, request.Biography);
                         }
                     }
                     else
@@ -97,7 +90,7 @@ namespace SyspotecApplication.Services
                         response.Result = false;
                         response.Message = "Ocurrio un error inesperado al guardar el usuario.";
                     }
-                }
+               // }
             }
             else
             {
@@ -148,7 +141,7 @@ namespace SyspotecApplication.Services
                     var consultUser = await GetIdByIdentifier(identifier);
                     if (consultUser != null && request.Biography != null)
                     {
-                        await AddOrUpdateBiography(consultUser.Id, request.Biography);
+                        //await AddOrUpdateBiography(consultUser.Id, request.Biography);
                     }
                 }
                 else
@@ -229,20 +222,21 @@ namespace SyspotecApplication.Services
             return valid;
         }
 
-        private async Task<ResponseApiDto?> AddOrUpdateBiography(int userId, UserBiographyDto request)
-        {
-            UserBiography modelBiography = new UserBiography();
-            modelBiography.UserId = userId;
-            modelBiography.Description = request.Description;
-            modelBiography.UrlFacebook = request.UrlFacebook;
-            modelBiography.UrlInstagram = request.UrlInstagram;
-            modelBiography.UrlSoundCloud = request.UrlSoundCloud;
-            modelBiography.UrlSpotify = request.UrlSpotify;
-            modelBiography.UrlWeb = request.UrlWeb;
-            modelBiography.UrlYoutube = request.UrlYoutube;
+        //private async Task<ResponseApiDto?> AddOrUpdateBiography(int userId, UserBiographyDto request)
+        //{
+        //    UserBiography modelBiography = new UserBiography();
+        //    modelBiography.UserId = userId;
+        //    modelBiography.Description = request.Description;
+        //    modelBiography.UrlFacebook = request.UrlFacebook;
+        //    modelBiography.UrlInstagram = request.UrlInstagram;
+        //    modelBiography.UrlSoundCloud = request.UrlSoundCloud;
+        //    modelBiography.UrlSpotify = request.UrlSpotify;
+        //    modelBiography.UrlWeb = request.UrlWeb;
+        //    modelBiography.UrlYoutube = request.UrlYoutube;
 
-            return await _userBiographyService.AddOrUpdate(modelBiography);
-        }
+        //    // return await _userBiographyService.AddOrUpdate(modelBiography);
+        //    return modelBiography;
+        //}
 
 
         private static string EncryptPassword(string password)

@@ -1,5 +1,4 @@
 ﻿using SyspotecDomain.Dtos.Generic;
-using SyspotecDomain.Dtos.Hibeat;
 using SyspotecDomain.Entities;
 using System;
 using System.Collections.Generic;
@@ -78,7 +77,7 @@ namespace SyspotecDomain.Dtos.User
 
         public UserMapDto? Map { get; set; }
 
-        public List<HibeatResponseDto> LstHibeat { get; set; }
+        //public List<HibeatResponseDto> LstHibeat { get; set; }
 
     }
 

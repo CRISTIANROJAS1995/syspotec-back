@@ -1,5 +1,4 @@
-﻿using SyspotecDomain.Dtos.Challenge;
-using SyspotecDomain.Dtos.Generic;
+﻿using SyspotecDomain.Dtos.Generic;
 using SyspotecDomain.Entities;
 using SyspotecDomain.IServices;
 using Microsoft.AspNetCore.Authorization;
@@ -14,12 +13,10 @@ namespace SyspotecAPI.Controllers
     public class GenericController : ControllerBase
     {
         private readonly IGenericService _genericService;
-        private readonly IChallengeService _challengeService;
 
-        public GenericController(IGenericService genericService, IChallengeService challengeService)
+        public GenericController(IGenericService genericService)
         {
             _genericService = genericService;
-            _challengeService = challengeService;
         }
 
         [AllowAnonymous]
@@ -140,17 +137,6 @@ namespace SyspotecAPI.Controllers
         public async Task<IActionResult> GetAllTypeReaction()
         {
             var response = await _genericService.GetAllTypeReaction();
-            return Ok(response);
-        }
-
-        [Authorize]
-        [HttpGet]
-        [Route("GetAllChallenge")]
-        [ProducesResponseType(200, Type = typeof(List<ChallengeDto>))]
-        [ProducesResponseType(400)]
-        public async Task<IActionResult> GetAllChallenge()
-        {
-            var response = await _challengeService.GetAllSummary();
             return Ok(response);
         }
 

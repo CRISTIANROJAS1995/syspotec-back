@@ -6,13 +6,12 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using SyspotecDomain.Dtos.Home;
 
 namespace SyspotecDomain.Dtos.Generic
 {
     public class PlayListGenericResponseDto
     {
-        public TypePlayListDto TypePlayList { get; set; }
+        //public TypePlayListDto TypePlayList { get; set; }
 
         public StateDto State { get; set; }
 

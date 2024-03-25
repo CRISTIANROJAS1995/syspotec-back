@@ -15,7 +15,7 @@ namespace SyspotecDomain.Dtos.User
         [EmailAddress]
         public string Email { get; set; }
 
-        [Required]
-        public TypeOtpEnum Type { get; set; }
+        //[Required]
+        //public TypeOtpEnum Type { get; set; }
     }
 }

@@ -1,6 +1,4 @@
 ﻿using SyspotecDomain.Dtos.Generic;
-using SyspotecDomain.Dtos.Hibeat;
-using SyspotecDomain.Dtos.Home;
 using SyspotecDomain.Entities;
 using SyspotecDomain.IRepositories;
 using Microsoft.EntityFrameworkCore;
@@ -146,12 +144,12 @@ namespace SyspotecDal.Repository
                 objState.Id = consult.State.Id;
                 objState.Name = consult.State.Name;
 
-                TypePlayListDto objType = new TypePlayListDto();
-                objType.Id = consult.TypePlayList.Id;
-                objType.Name = consult.TypePlayList.Name;
+                //TypePlayListDto objType = new TypePlayListDto();
+                //objType.Id = consult.TypePlayList.Id;
+                //objType.Name = consult.TypePlayList.Name;
 
                 response.State = objState;
-                response.TypePlayList = objType;
+              //  response.TypePlayList = objType;
                 response.CoverImage = consult.CoverImage;
                 response.Title = consult.Title;
                 response.Description = consult.Description;

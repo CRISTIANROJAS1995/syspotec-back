@@ -48,41 +48,9 @@ builder.Services.AddCors(p => p.AddPolicy("corsapp", builder =>
 //builder.Services.AddTransient<IExampleService, ExampleService>();
 builder.Services.AddScoped<IJWTManagerRepository, JWTManagerRepository>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
-builder.Services.AddScoped<ISendEmailRepository, SendEmailRepository>();
-builder.Services.AddScoped<IUserOtpRepository, UserOtpRepository>();
-builder.Services.AddScoped<IUserActivationRepository, UserActivationRepository>();
-builder.Services.AddScoped<IUserBiographyRepository, UserBiographyRepository>();
-builder.Services.AddScoped<IUserBlockRepository, UserBlockRepository>();
-builder.Services.AddScoped<IUserFollowerRepository, UserFollowerRepository>();
-builder.Services.AddScoped<IUserImageRepository, UserImageRepository>();
-builder.Services.AddScoped<IUserMapRepository, UserMapRepository>();
-builder.Services.AddScoped<IHibeatRepository, HibeatRepository>();
-builder.Services.AddScoped<IHiBeatInstrumentInterestRepository, HiBeatInstrumentInterestRepository>();
-builder.Services.AddScoped<IHiBeatMusicalInterestRepository, HiBeatMusicalInterestRepository>();
-builder.Services.AddScoped<IReactionRepository, ReactionRepository>();
-builder.Services.AddScoped<IPromotionRepository, PromotionRepository>();
-builder.Services.AddScoped<IInformationRepository, InformationRepository>();
 builder.Services.AddScoped<IGenericRepository, GenericRepository>();
-builder.Services.AddScoped<IChallengeRepository, ChallengeRepository>();
-builder.Services.AddScoped<IUserDailyAchievementRepository, UserDailyAchievementRepository>();
 
-builder.Services.AddScoped<IUserOtpService, UserOtpService>();
-builder.Services.AddScoped<IUserActivationService, UserActivationService>();
 builder.Services.AddScoped<IUserService, UserService>();
-builder.Services.AddScoped<IUserBiographyService, UserBiographyService>();
-builder.Services.AddScoped<IUserBlockService, UserBlockService>();
-builder.Services.AddScoped<IUserFollowerService, UserFollowerService>();
-builder.Services.AddScoped<IUserImageService, UserImageService>();
-builder.Services.AddScoped<IUserMapService, UserMapService>();
-builder.Services.AddScoped<IHibeatService, HibeatService>();
-builder.Services.AddScoped<IReactionService, ReactionService>();
-builder.Services.AddScoped<IPromotionService, PromotionService>();
-builder.Services.AddScoped<IInformationService, InformationService>();
-builder.Services.AddScoped<IHomeService, HomeService>();
-builder.Services.AddScoped<IChallengeService, ChallengeService>();
-builder.Services.AddScoped<IUserDailyAchievementService, UserDailyAchievementService>();
-
-//Generic List
 builder.Services.AddScoped<IGenericService, GenericService>();
 
 builder.Services.AddAuthorization();
