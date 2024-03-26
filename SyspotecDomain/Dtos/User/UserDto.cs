@@ -28,5 +28,7 @@ namespace SyspotecDomain.Dtos.User
         public string Phone { get; set; }
 
         public string Address { get; set; }
+
+        public List<UserFileDto>? File { get; set; }
     }
 }

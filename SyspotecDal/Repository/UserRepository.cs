@@ -58,7 +58,10 @@ namespace SyspotecDal.Repository
 
             if (list.Count > 0)
             {
-                response.AddRange(list.AsEnumerable().Select(g => UserDto(g)).ToList()!);
+                foreach (User item in list)
+                {
+                    response.Add(await UserDto(item));
+                }
             }
 
             return response;
@@ -76,7 +79,7 @@ namespace SyspotecDal.Repository
                  .Include("State")
                  .FirstOrDefaultAsync(c => c.Identifier == identifier);
 
-            return UserDto(obj);
+            return await UserDto(obj);
         }
 
         public async Task<User?> ByIdentifier(string identifier)
@@ -106,10 +109,71 @@ namespace SyspotecDal.Repository
                  .Include("State")
                  .FirstOrDefaultAsync((u => u.Email == model.Email && u.Password == model.Password));
 
-            return UserDto(consult);
+            return await UserDto(consult);
         }
 
-        private UserDto UserDto(User? consult)
+        #region UserFile
+
+        public async Task<int?> AddUserFile(UserFile model)
+        {
+            await _context.AddAsync(model);
+            return await _context.SaveChangesAsync();
+        }
+
+        public async Task<int?> UpdateUserFile(UserFile model)
+        {
+            _context.Update(model);
+            return await _context.SaveChangesAsync();
+        }
+
+        public async Task<UserFile?> UserFileByType(int typeFileId)
+        {
+            return await _context.UserFile.AsNoTracking().FirstOrDefaultAsync(c => c.TypeFileId == typeFileId);
+        }
+
+        public async Task<List<UserFileDto>?> AllFileByUser(string userId)
+        {
+            List<UserFileDto> response = new List<UserFileDto>();
+
+            var consultUser = await ByIdentifier(userId);
+            if (consultUser != null)
+            {
+                var list = await _context.UserFile
+                               .AsNoTracking()
+                               .Include("TypeFile")
+                               .OrderBy(c => c.CreatedDate)
+                               .Where(c => c.UserId == consultUser.Id)
+                               .ToListAsync();
+
+                if (list.Count > 0)
+                {
+                    response.AddRange(list.AsEnumerable().Select(g => UserFileDto(g)).ToList()!);
+                }
+            }
+
+            return response;
+        }
+
+        private UserFileDto UserFileDto(UserFile? consult)
+        {
+            UserFileDto response = new UserFileDto();
+
+            if (consult != null)
+            {
+                TypeFileDto objTypeFile = new TypeFileDto();
+                objTypeFile.Id = consult.TypeFile.Id;
+                objTypeFile.Name = consult.TypeFile.Name;
+
+                response.TypeFile = objTypeFile;
+                response.Url = consult.Url;
+            }
+
+            return response;
+        }
+
+        #endregion
+
+        private async Task<UserDto> UserDto(User? consult)
         {
             UserDto response = new UserDto();
 
@@ -156,6 +220,8 @@ namespace SyspotecDal.Repository
                 response.Identification = consult.Identification;
                 response.Phone = consult.Phone;
                 response.Address = consult.Address;
+
+                response.File = await AllFileByUser(consult.Identifier);
             }
 
             return response;

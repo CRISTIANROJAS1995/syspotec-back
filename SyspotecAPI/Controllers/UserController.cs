@@ -125,5 +125,26 @@ namespace SyspotecAPI.Controllers
             return Ok(consult);
         }
 
+        [Authorize]
+        [HttpPost]
+        [Route("AddFile")]
+        [ProducesResponseType(200)]
+        [ProducesResponseType(400)]
+        [ProducesResponseType(500)]
+        public async Task<IActionResult> AddFile([FromBody] UserFileInput request)
+        {
+            if (request == null)
+            {
+                return BadRequest(ModelState);
+            }
+
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            return Ok(await _userService.AddUserFile(request, User.FindFirstValue(ClaimTypes.NameIdentifier)));
+        }
+
     }
 }

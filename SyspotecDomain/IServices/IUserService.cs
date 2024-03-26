@@ -16,5 +16,8 @@ namespace SyspotecDomain.IServices
         Task<User?> ByIdentifier(string identifier);
         Task<User?> ByEmail(string email);
         Task<Company?> CompanyByIdentifier(string identifier);
+        Task<ResponseApiDto?> AddUserFile(UserFileInput request, string userId);
+        Task<ResponseApiDto?> UpdateUserFile(UserFileUpdateInput request, string identifier);
+        Task<List<UserFileDto>?> AllFileByUser(string userId);
     }
 }

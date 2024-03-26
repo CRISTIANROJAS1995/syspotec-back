@@ -14,5 +14,9 @@ namespace SyspotecDomain.IRepositories
         Task<User?> ByEmail(string email);
         Task<Company?> CompanyByIdentifier(string identifier);
         Task<UserDto> ValidAuth(LoginInput model);
+        Task<int?> AddUserFile(UserFile model);
+        Task<int?> UpdateUserFile(UserFile model);
+        Task<UserFile?> UserFileByType(int typeFileId);
+        Task<List<UserFileDto>?> AllFileByUser(string userId);
     }
 }

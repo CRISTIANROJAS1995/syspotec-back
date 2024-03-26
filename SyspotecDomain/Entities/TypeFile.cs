@@ -11,5 +11,6 @@ namespace SyspotecDomain.Entities
         public string Name { get; set; }
 
         public ICollection<Contract> Contract { get; set; }
+        public ICollection<UserFile> UserFile { get; set; }
     }
 }

@@ -68,5 +68,6 @@ namespace SyspotecDomain.Entities
         public State State { get; set; }
 
         public ICollection<UserContract> UserContract { get; set; }
+        public ICollection<UserFile> UserFile { get; set; }
     }
 }

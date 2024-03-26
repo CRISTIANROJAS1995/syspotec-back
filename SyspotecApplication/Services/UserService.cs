@@ -156,6 +156,100 @@ namespace SyspotecApplication.Services
             return await _userRepository.CompanyByIdentifier(identifier);
         }
 
+        #region UserFile
+
+        public async Task<ResponseApiDto?> AddUserFile(UserFileInput request, string userId)
+        {
+            var response = new ResponseApiDto();
+
+            var userFile = await _userRepository.UserFileByType(request.TypeFileId);
+            if (userFile == null)
+            {
+                var consultUser = await ByIdentifier(userId);
+                if (consultUser != null)
+                {
+                    UserFile model = new()
+                    {
+                        UserId = consultUser.Id,
+                        StateId = (int)StateEnum.Active,
+                        TypeFileId = request.TypeFileId,
+                        Url = request.Url,
+                        CreatedDate = DateTime.Now,
+                        UpdateDate = DateTime.Now,
+                    };
+
+                    var responseAdd = await _userRepository.AddUserFile(model);
+                    if (responseAdd == 1)
+                    {
+                        response.Result = true;
+                    }
+                    else
+                    {
+                        response.Result = false;
+                        response.Message = "Ocurrio un error inesperado al guardar el archivo.";
+                    }
+                }
+                else
+                {
+                    response.Result = false;
+                    response.Message = "El usuario no existe.";
+                }
+            }
+            else
+            {
+                response.Result = false;
+                response.Message = "El usuario ya tiene guardado ese tiene de archivo.";
+            }
+
+            return response;
+        }
+
+        public async Task<ResponseApiDto?> UpdateUserFile(UserFileUpdateInput request, string identifier)
+        {
+            var response = new ResponseApiDto();
+
+            var user = await _userRepository.ByIdentifier(identifier);
+            if (user == null)
+            {
+                response.Result = false;
+                response.Message = "El usuario no existe.";
+            }
+            else
+            {
+                var userFile = await _userRepository.UserFileByType(request.TypeFileId);
+                if (userFile == null)
+                {
+                    response.Result = false;
+                    response.Message = "El usuario no tiene asignado este tipo de arhcivo";
+                }
+                else
+                {
+                    userFile.Url = request.Url != null ? request.Url : user.Name;
+                    userFile.UpdateDate = DateTime.Now;
+
+                    var responseUpdate = await _userRepository.UpdateUserFile(userFile);
+                    if (responseUpdate == 1)
+                    {
+                        response.Result = true;
+                    }
+                    else
+                    {
+                        response.Result = false;
+                        response.Message = "Ocurrio un error inesperado al actualizar el archivo.";
+                    }
+                }
+            }
+
+            return response;
+        }
+
+        public async Task<List<UserFileDto>?> AllFileByUser(string userId)
+        {
+            return await _userRepository.AllFileByUser(userId);
+        }
+
+        #endregion
+
         private static string EncryptPassword(string password)
         {
             var md5 = new MD5CryptoServiceProvider();
