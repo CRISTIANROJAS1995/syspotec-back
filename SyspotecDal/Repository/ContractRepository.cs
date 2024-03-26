@@ -11,12 +11,15 @@ namespace SyspotecDal.Repository
     public class ContractRepository : IContractRepository
     {
         private readonly ApplicationDbContext _context;
+        private readonly IUserRepository _userRepository;
 
         public ContractRepository(
-            ApplicationDbContext context
+            ApplicationDbContext context,
+            IUserRepository userRepository
             )
         {
             _context = context;
+            _userRepository = userRepository;
         }
 
         public async Task<int?> Add(Contract model)
@@ -80,6 +83,228 @@ namespace SyspotecDal.Repository
             return await _context.Company.AsNoTracking().FirstOrDefaultAsync(c => c.Identifier == identifier);
         }
 
+        #region User Contract
+
+        public async Task<int?> AddUserContract(UserContract model)
+        {
+            await _context.AddAsync(model);
+            return await _context.SaveChangesAsync();
+        }
+
+        public async Task<int?> UpdateUserContract(UserContract model)
+        {
+            _context.Update(model);
+            return await _context.SaveChangesAsync();
+        }
+
+        public async Task<UserContract?> UserContractFilter(int contractId, int userId)
+        {
+            return await _context.UserContract
+                 .AsNoTracking()
+                 .OrderBy(c => c.CreatedDate)
+                 .Where(c => c.ContractId == contractId && c.UserId == userId)
+                 .FirstOrDefaultAsync();
+        }
+
+        public async Task<UserContractDto?> UserContractDtoFilter(int contractId, int userId)
+        {
+            UserContractDto response = new UserContractDto();
+
+            var consult = await _context.UserContract
+                 .AsNoTracking()
+                 .Include("Contract")
+                 .Include("Contract.Company")
+                 .Include("Contract.Company.State")
+                 .Include("Contract.State")
+                 .Include("Contract.TypeFile")
+                 .Include("User")
+                 .Include("State")
+                 .OrderBy(c => c.CreatedDate)
+                 .Where(c => c.ContractId == contractId && c.UserId == userId)
+                 .FirstOrDefaultAsync();
+
+            if (consult != null)
+            {
+                return response = await UserContractDto(consult);
+            }
+            else
+            {
+                return null;
+            }
+        }
+
+        public async Task<List<UserContractDto>?> AllUserContract()
+        {
+            List<UserContractDto> response = new List<UserContractDto>();
+
+            var list = await _context.UserContract
+                 .AsNoTracking()
+                 .Include("Contract")
+                 .Include("Contract.Company")
+                 .Include("Contract.Company.State")
+                 .Include("Contract.State")
+                 .Include("Contract.TypeFile")
+                 .Include("User")
+                 .Include("State")
+                 .OrderBy(c => c.CreatedDate)
+                 .ToListAsync();
+
+            if (list.Count > 0)
+            {
+                foreach (UserContract item in list)
+                {
+                    response.Add(await UserContractDto(item));
+                }
+            }
+
+            return response;
+        }
+
+        public async Task<List<UserContractDto>?> AllUserContractByContract(int contractId)
+        {
+            List<UserContractDto> response = new List<UserContractDto>();
+
+            var list = await _context.UserContract
+                 .AsNoTracking()
+                 .Include("Contract")
+                 .Include("Contract.Company")
+                 .Include("Contract.Company.State")
+                 .Include("Contract.State")
+                 .Include("Contract.TypeFile")
+                 .Include("User")
+                 .Include("State")
+                 .OrderBy(c => c.CreatedDate)
+                 .Where(c => c.ContractId == contractId)
+                 .ToListAsync();
+
+            if (list.Count > 0)
+            {
+                foreach (UserContract item in list)
+                {
+                    response.Add(await UserContractDto(item));
+                }
+            }
+
+            return response;
+        }
+
+        public async Task<List<UserContractDto>?> AllUserContractByUser(string userId)
+        {
+            List<UserContractDto> response = new List<UserContractDto>();
+            var consultUser = await _userRepository.ByIdentifier(userId);
+            if (consultUser != null)
+            {
+                var list = await _context.UserContract
+                                .AsNoTracking()
+                                .Include("Contract")
+                                .Include("Contract.Company")
+                                .Include("Contract.Company.State")
+                                .Include("Contract.State")
+                                .Include("Contract.TypeFile")
+                                .Include("User")
+                                .Include("State")
+                                .OrderBy(c => c.CreatedDate)
+                                .Where(c => c.UserId == consultUser.Id)
+                                .ToListAsync();
+
+                if (list.Count > 0)
+                {
+                    foreach (UserContract item in list)
+                    {
+                        response.Add(await UserContractDto(item));
+                    }
+                }
+            }
+
+            return response;
+        }
+
+        public async Task<List<UserContractDto>?> AllUserContractByAssign(string userAssign)
+        {
+            List<UserContractDto> response = new List<UserContractDto>();
+
+            var list = await _context.UserContract
+                 .AsNoTracking()
+                 .Include("Contract")
+                 .Include("Contract.Company")
+                 .Include("Contract.Company.State")
+                 .Include("Contract.State")
+                 .Include("Contract.TypeFile")
+                 .Include("User")
+                 .Include("State")
+                 .OrderBy(c => c.CreatedDate)
+                 .Where(c => c.UserAssign == userAssign)
+                 .ToListAsync();
+
+            if (list.Count > 0)
+            {
+                foreach (UserContract item in list)
+                {
+                    response.Add(await UserContractDto(item));
+                }
+            }
+
+            return response;
+        }
+
+        public async Task<List<UserContractDto>?> AllUserContractByState(StateEnum stateId)
+        {
+            List<UserContractDto> response = new List<UserContractDto>();
+
+            var list = await _context.UserContract
+                 .AsNoTracking()
+                 .Include("Contract")
+                 .Include("Contract.Company")
+                 .Include("Contract.Company.State")
+                 .Include("Contract.State")
+                 .Include("Contract.TypeFile")
+                 .Include("User")
+                 .Include("State")
+                 .OrderBy(c => c.CreatedDate)
+                 .Where(c => c.StateId == (int)stateId)
+                 .ToListAsync();
+
+            if (list.Count > 0)
+            {
+                foreach (UserContract item in list)
+                {
+                    response.Add(await UserContractDto(item));
+                }
+            }
+
+            return response;
+        }
+
+        public async Task<List<UserContractDto>?> AllUserContractByUserState(StateEnum stateId, int userId)
+        {
+            List<UserContractDto> response = new List<UserContractDto>();
+
+            var list = await _context.UserContract
+                 .AsNoTracking()
+                 .Include("Contract")
+                 .Include("Contract.Company")
+                 .Include("Contract.Company.State")
+                 .Include("Contract.State")
+                 .Include("Contract.TypeFile")
+                 .Include("User")
+                 .Include("State")
+                 .OrderBy(c => c.CreatedDate)
+                 .Where(c => c.StateId == (int)stateId && c.UserId == userId)
+                 .ToListAsync();
+
+            if (list.Count > 0)
+            {
+                foreach (UserContract item in list)
+                {
+                    response.Add(await UserContractDto(item));
+                }
+            }
+
+            return response;
+        }
+
+        #endregion
+
         private ContractDto ContractDto(Contract? consult)
         {
             ContractDto response = new ContractDto();
@@ -114,6 +339,27 @@ namespace SyspotecDal.Repository
                 response.Name = consult.Name;
                 response.Descripcion = consult.Descripcion;
                 response.Url = consult.Url;
+                response.CreatedDate = consult.CreatedDate;
+                response.UpdateDate = consult.UpdateDate;
+            }
+
+            return response;
+        }
+
+        private async Task<UserContractDto> UserContractDto(UserContract? consult)
+        {
+            UserContractDto response = new UserContractDto();
+
+            if (consult != null)
+            {
+                StateDto objState = new StateDto();
+                objState.Id = consult.State.Id;
+                objState.Name = consult.State.Name;
+
+                response.Contract = ContractDto(consult.Contract);
+                response.State = objState;
+                response.User = await _userRepository.ByIdentifierDto(consult.User.Identifier);
+                response.UserAssign = await _userRepository.ByIdentifierDto(consult.UserAssign);
                 response.CreatedDate = consult.CreatedDate;
                 response.UpdateDate = consult.UpdateDate;
             }

@@ -66,5 +66,7 @@ namespace SyspotecDomain.Entities
 
         [ForeignKey("StateId")]
         public State State { get; set; }
+
+        public ICollection<UserContract> UserContract { get; set; }
     }
 }

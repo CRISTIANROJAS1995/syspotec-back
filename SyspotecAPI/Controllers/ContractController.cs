@@ -8,6 +8,7 @@ using SyspotecDomain.Input;
 using SyspotecDomain.Dtos.User;
 using SyspotecDomain.IRepositories;
 using SyspotecDomain.Dtos.Contract;
+using SyspotecApplication.Services;
 
 namespace SyspotecAPI.Controllers
 {
@@ -84,6 +85,76 @@ namespace SyspotecAPI.Controllers
         {
             var consult = await _contractService.ByIdentifierDto(id);
             if (consult.Identifier == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(consult);
+        }
+
+        [Authorize(Roles = "Admin")]
+        [HttpPost]
+        [Route("AssignContract")]
+        [ProducesResponseType(200)]
+        [ProducesResponseType(400)]
+        [ProducesResponseType(500)]
+        public async Task<IActionResult> AssignContract([FromBody] UserContractInput request)
+        {
+            if (request == null)
+            {
+                return BadRequest(ModelState);
+            }
+
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            return Ok(await _contractService.AddUserContract(request));
+        }
+
+        [Authorize]
+        [HttpPut]
+        [Route("UpdateAssignContract")]
+        [ProducesResponseType(200)]
+        [ProducesResponseType(400)]
+        [ProducesResponseType(500)]
+        public async Task<IActionResult> UpdateAssignContract([FromBody] UserContractUpdateInput request)
+        {
+            if (request == null)
+            {
+                return BadRequest(ModelState);
+            }
+
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            return Ok(await _contractService.UpdateUserContract(request, User.FindFirstValue(ClaimTypes.NameIdentifier)));
+        }
+
+        [Authorize(Roles = "Admin")]
+        [HttpGet]
+        [Route("AllAssignContract")]
+        [ProducesResponseType(200, Type = typeof(List<UserContractDto>))]
+        [ProducesResponseType(400)]
+        public async Task<IActionResult> AllAssignContract()
+        {
+            var response = await _contractService.AllUserContract();
+            return Ok(response);
+        }
+
+        [Authorize]
+        [HttpGet]
+        [Route("MyAssignContract")]
+        [ProducesResponseType(200, Type = typeof(List<UserContractDto>))]
+        [ProducesResponseType(400)]
+        [ProducesResponseType(404)]
+        public async Task<IActionResult> MyAssignContract()
+        {
+            var consult = await _contractService.AllUserContractByUser(User.FindFirstValue(ClaimTypes.NameIdentifier));
+            if (consult == null)
             {
                 return NotFound();
             }

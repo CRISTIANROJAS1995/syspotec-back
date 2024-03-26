@@ -1,5 +1,6 @@
 ﻿using SyspotecDomain.Dtos.Contract;
 using SyspotecDomain.Entities;
+using SyspotecDomain.Enums;
 
 namespace SyspotecDomain.IRepositories
 {
@@ -12,5 +13,15 @@ namespace SyspotecDomain.IRepositories
         Task<Contract?> ByIdentifier(string identifier);
         Task<Contract?> ByName(string name);
         Task<Company?> CompanyByIdentifier(string identifier);
+        Task<int?> AddUserContract(UserContract model);
+        Task<int?> UpdateUserContract(UserContract model);
+        Task<UserContract?> UserContractFilter(int contractId, int userId);
+        Task<UserContractDto?> UserContractDtoFilter(int contractId, int userId);
+        Task<List<UserContractDto>?> AllUserContract();
+        Task<List<UserContractDto>?> AllUserContractByContract(int contractId);
+        Task<List<UserContractDto>?> AllUserContractByUser(string userId);
+        Task<List<UserContractDto>?> AllUserContractByAssign(string userAssign);
+        Task<List<UserContractDto>?> AllUserContractByState(StateEnum stateId);
+        Task<List<UserContractDto>?> AllUserContractByUserState(StateEnum stateId, int userId);
     }
 }

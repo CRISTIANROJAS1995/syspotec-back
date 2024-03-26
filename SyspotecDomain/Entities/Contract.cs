@@ -43,6 +43,8 @@ namespace SyspotecDomain.Entities
 
         [ForeignKey("TypeFileId")]
         public TypeFile TypeFile { get; set; }
-     
+
+        public ICollection<UserContract> UserContract { get; set; }
+
     }
 }
