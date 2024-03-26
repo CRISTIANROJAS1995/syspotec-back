@@ -18,7 +18,7 @@ namespace SyspotecAPI.Controllers
             _genericService = genericService;
         }
 
-        [AllowAnonymous]
+        [Authorize(Roles = "Admin")]
         [HttpGet]
         [Route("AllCompany")]
         [ProducesResponseType(200, Type = typeof(List<CompanyDto>))]
@@ -51,7 +51,7 @@ namespace SyspotecAPI.Controllers
             return Ok(response);
         }
 
-        [AllowAnonymous]
+        [Authorize(Roles = "Admin")]
         [HttpGet]
         [Route("AllRole")]
         [ProducesResponseType(200, Type = typeof(List<RoleDto>))]
@@ -73,7 +73,7 @@ namespace SyspotecAPI.Controllers
             return Ok(response);
         }
 
-        [AllowAnonymous]
+        [Authorize(Roles = "Admin")]
         [HttpGet]
         [Route("Configuration")]
         [ProducesResponseType(200, Type = typeof(Configuration))]

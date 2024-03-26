@@ -17,6 +17,6 @@ namespace SyspotecDal
         public DbSet<TypeFile> TypeFile { get; set; }
         public DbSet<Configuration> Configuration { get; set; }
         public DbSet<User> User { get; set; }
-
+        public DbSet<Contract> Contract { get; set; }
     }
 }

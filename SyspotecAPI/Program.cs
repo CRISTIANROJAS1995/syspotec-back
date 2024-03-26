@@ -53,9 +53,11 @@ builder.Services.AddScoped<IAuthorizationHandler, RoleRequirementHandler>();
 builder.Services.AddScoped<IJWTManagerRepository, JWTManagerRepository>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IGenericRepository, GenericRepository>();
+builder.Services.AddScoped<IContractRepository, ContractRepository>();
 
 builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<IGenericService, GenericService>();
+builder.Services.AddScoped<IContractService, ContractService>();
 
 builder.Services.AddAuthorization(options =>
 {

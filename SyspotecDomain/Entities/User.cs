@@ -66,14 +66,5 @@ namespace SyspotecDomain.Entities
 
         [ForeignKey("StateId")]
         public State State { get; set; }
-
-
-        //public ICollection<UserBiography> UserBiography { get; set; }
-        //public ICollection<UserBlock> UserBlock { get; set; }
-        //public ICollection<UserFollower> UserFollower { get; set; }
-        //public ICollection<UserImage> UserImage { get; set; }
-        //public ICollection<UserMap> UserMap { get; set; }
-        //public ICollection<Reaction> Reaction { get; set; }
-        //public ICollection<UserDailyAchievement> UserDailyAchievement { get; set; }
     }
 }
