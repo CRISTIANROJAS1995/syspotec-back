@@ -9,6 +9,8 @@ using SyspotecDomain.IRepositories;
 using SyspotecApplication.Services;
 using SyspotecDomain.IServices;
 using System.Text.Json.Serialization;
+using Microsoft.AspNetCore.Authorization;
+using SyspotecUtils;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -45,6 +47,8 @@ builder.Services.AddCors(p => p.AddPolicy("corsapp", builder =>
     builder.WithOrigins("*").AllowAnyMethod().AllowAnyHeader();
 }));
 
+builder.Services.AddScoped<IAuthorizationHandler, RoleRequirementHandler>();
+
 //builder.Services.AddTransient<IExampleService, ExampleService>();
 builder.Services.AddScoped<IJWTManagerRepository, JWTManagerRepository>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
@@ -53,7 +57,10 @@ builder.Services.AddScoped<IGenericRepository, GenericRepository>();
 builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<IGenericService, GenericService>();
 
-builder.Services.AddAuthorization();
+builder.Services.AddAuthorization(options =>
+{
+    options.AddPolicy("Admin", policy => policy.RequireRole("Admin"));
+});
 
 builder.Services.AddHttpContextAccessor();
 

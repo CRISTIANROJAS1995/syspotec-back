@@ -82,7 +82,7 @@ namespace SyspotecAPI.Controllers
             return Ok(await _userService.Update(request, User.FindFirstValue(ClaimTypes.NameIdentifier)));
         }
 
-        [Authorize]
+        [Authorize(Roles = "Admin")]
         [HttpGet]
         [Route("All")]
         [ProducesResponseType(200, Type = typeof(List<UserDto>))]
@@ -109,7 +109,7 @@ namespace SyspotecAPI.Controllers
             return Ok(consult);
         }
 
-        [Authorize]
+        [Authorize(Roles = "Admin")]
         [HttpGet("{id}")]
         [ProducesResponseType(200, Type = typeof(UserDto))]
         [ProducesResponseType(400)]

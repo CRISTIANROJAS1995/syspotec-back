@@ -1018,9 +1018,11 @@
         "framework": ".NETCoreApp,Version=v6.0",
         "dependencies": {
           "EntityFramework": "6.4.4",
+          "Microsoft.AspNetCore.Authentication.JwtBearer": "6.0.10",
           "Microsoft.AspNetCore.Http.Abstractions": "2.2.0",
           "Microsoft.EntityFrameworkCore": "6.0.10",
-          "SyspotecDomain": "1.0.0"
+          "SyspotecDomain": "1.0.0",
+          "System.IdentityModel.Tokens.Jwt": "7.4.1"
         },
         "compile": {
           "bin/placeholder/SyspotecUtils.dll": {}

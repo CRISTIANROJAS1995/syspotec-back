@@ -43,7 +43,8 @@ namespace SyspotecDal.Repository
               {
                 new Claim(ClaimTypes.NameIdentifier, valid.Identifier),
                 new Claim(ClaimTypes.Name, valid.Name),
-                new Claim(ClaimTypes.Email, request.Email)
+                new Claim(ClaimTypes.Email, request.Email),
+                new Claim(ClaimTypes.Role, valid.Role.Name),
               }),
                 Expires = DateTime.UtcNow.AddMinutes(1440), //24hours
                 SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(tokenKey), SecurityAlgorithms.HmacSha256Signature)
