@@ -14,6 +14,8 @@ namespace SyspotecDal
         public DbSet<Gender> Gender { get; set; }
         public DbSet<Role> Role { get; set; }
         public DbSet<TypeIdentification> TypeIdentification { get; set; }
+        public DbSet<TypeFile> TypeFile { get; set; }
+        public DbSet<Configuration> Configuration { get; set; }
         public DbSet<User> User { get; set; }
 
     }

@@ -1,4 +1,5 @@
 ﻿using SyspotecDomain.Dtos.Generic;
+using SyspotecDomain.Entities;
 using SyspotecDomain.IRepositories;
 using SyspotecDomain.IServices;
 
@@ -37,6 +38,16 @@ namespace SyspotecApplication.Services
         public async Task<List<TypeIdentificationDto>?> AllTypeIdentification()
         {
             return await _genericRepository.AllTypeIdentification();
+        }
+
+        public async Task<Configuration?> Configuration()
+        {
+            return await _genericRepository.Configuration();
+        }
+
+        public async Task<List<TypeFileDto>?> AllTypeFile()
+        {
+            return await _genericRepository.AllTypeFile();
         }
 
     }

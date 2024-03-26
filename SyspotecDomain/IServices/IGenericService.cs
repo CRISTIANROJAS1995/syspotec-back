@@ -1,4 +1,5 @@
 ﻿using SyspotecDomain.Dtos.Generic;
+using SyspotecDomain.Entities;
 
 namespace SyspotecDomain.IServices
 {
@@ -9,5 +10,7 @@ namespace SyspotecDomain.IServices
         Task<List<GenderDto>?> AllGender();
         Task<List<RoleDto>?> AllRole();
         Task<List<TypeIdentificationDto>?> AllTypeIdentification();
+        Task<Configuration?> Configuration();
+        Task<List<TypeFileDto>?> AllTypeFile();
     }
 }

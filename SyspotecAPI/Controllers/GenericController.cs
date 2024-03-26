@@ -73,5 +73,27 @@ namespace SyspotecAPI.Controllers
             return Ok(response);
         }
 
+        [AllowAnonymous]
+        [HttpGet]
+        [Route("Configuration")]
+        [ProducesResponseType(200, Type = typeof(Configuration))]
+        [ProducesResponseType(400)]
+        public async Task<IActionResult> Configuration()
+        {
+            var response = await _genericService.Configuration();
+            return Ok(response);
+        }
+
+        [AllowAnonymous]
+        [HttpGet]
+        [Route("AllTypeFile")]
+        [ProducesResponseType(200, Type = typeof(List<TypeFileDto>))]
+        [ProducesResponseType(400)]
+        public async Task<IActionResult> AllTypeFile()
+        {
+            var response = await _genericService.AllTypeFile();
+            return Ok(response);
+        }
+
     }
 }

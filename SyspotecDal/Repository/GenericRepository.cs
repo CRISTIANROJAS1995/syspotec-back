@@ -68,6 +68,21 @@ namespace SyspotecDal.Repository
                                 .ToListAsync();
         }
 
+        public async Task<Configuration?> Configuration()
+        {
+            return await _context.Configuration
+                                .OrderBy(c => c.Id)
+                                .FirstOrDefaultAsync();
+        }
+
+        public async Task<List<TypeFileDto>?> AllTypeFile()
+        {
+            return await _context.TypeFile
+                                .OrderBy(c => c.Id)
+                                .Select(g => new TypeFileDto { Id = g.Id, Name = g.Name })
+                                .ToListAsync();
+        }
+
         private CompanyDto CompanyDto(Company consult)
         {
             CompanyDto response = new CompanyDto();
